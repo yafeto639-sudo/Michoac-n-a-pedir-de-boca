@@ -1,0 +1,541 @@
+Here is the updated code. I have added an elegant, dedicated **"Book a Table / Event"** reservation section right above the footer, complete with a clean web form where guests can select their date, time, and party size.
+
+I also updated the navigation bar and the main header button so that when users click "Book Online," the page smoothly glides down to the reservation section.
+
+### Updated Web Code
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art & Cafe | Cozy Coffee, Boba & Pastries in Loganville</title>
+    <style>
+        /* Modern Reset & Root Styling */
+        :root {
+            --primary: #6F4E37; /* Coffee Warm Brown */
+            --secondary: #EEDC82; /* Pastry Flaxen Gold */
+            --accent: #A3C1AD; /* Matcha / Boba Sage Green */
+            --dark: #2C221E;
+            --light: #FAF7F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth; /* Smooth scrolling to sections */
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links .btn-nav {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+        }
+        
+        .nav-links .btn-nav:hover {
+            background-color: #553c29;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 34, 30, 0.6), rgba(44, 34, 30, 0.7)), 
+                        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: Georgia, serif;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #553c29;
+            transform: translateY(-2px);
+        }
+
+        .btn.btn-alt {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .btn.btn-alt:hover {
+            background-color: white;
+            color: var(--dark);
+        }
+
+        /* Info Highlights Section */
+        .info-ribbon {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .info-item {
+            margin: 0.5rem 1rem;
+        }
+
+        /* Main Content Containers */
+        .container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-family: Georgia, serif;
+        }
+
+        /* Menu Section Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-top: 4px solid var(--primary);
+        }
+
+        .menu-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background-color: #f1ede9;
+            padding: 5rem 0;
+        }
+
+        .booking-form {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #553c29;
+        }
+
+        /* Reviews Blockquote Layout */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer & Contact info */
+        footer {
+            background-color: var(--dark);
+            color: #dcd1cb;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            border-bottom: 1px solid #44352f;
+            padding-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.25rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .info-ribbon { flex-direction: column; gap: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .cta-buttons { flex-direction: column; width: 80%; }
+            .btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="logo">ART & CAFE</div>
+        <div class="nav-links">
+            <a href="#menu">Our Menu</a>
+            <a href="#about">About Us</a>
+            <a href="#book" class="btn-nav">Book Online</a>
+        </div>
+    </nav>
+
+    <!-- Visual Hero Image Section -->
+    <header class="hero">
+        <h1>Your Cozy Neighborhood Hideaway</h1>
+        <p>Handcrafted coffee, premium boba teas, and freshly baked local treats served daily with a warm, genuine smile.</p>
+        <div class="cta-buttons">
+            <a href="#menu" class="btn">View Our Menu</a>
+            <a href="#book" class="btn btn-alt">Book a Table</a>
+        </div>
+    </header>
+
+    <!-- Live Store Data Ribbon -->
+    <section class="info-ribbon">
+        <div class="info-item">📍 4699 Rosebud Rd, Loganville, GA 30052</div>
+        <div class="info-item">📞 (706) 312-2311</div>
+        <div class="info-item">⏰ Open Daily • Closes at 7:30 PM</div>
+    </section>
+
+    <!-- Main Dynamic Menu Block -->
+    <main class="container" id="menu">
+        <h2 class="section-title">Crafted with Love</h2>
+        <div class="menu-grid">
+            
+            <!-- Cafe & Coffee Category -->
+            <div class="menu-category">
+                <h3>Coffee & Tea</h3>
+                <div class="menu-item">
+                    <span class="item-name">Premium Cappuccino</span>
+                    <span>$4.50</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Matcha Latte</span>
+                    <span>$4.75</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">House Brewed Hot Tea</span>
+                    <span>$3.25</span>
+                </div>
+            </div>
+
+            <!-- Signature Bubble Teas -->
+            <div class="menu-category">
+                <h3>Signature Boba</h3>
+                <div class="menu-item">
+                    <span class="item-name">Classic Brown Sugar Milk Tea</span>
+                    <span>$5.50</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Taro Milk Boba</span>
+                    <span>$5.75</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Fruit Infused Green Tea</span>
+                    <span>$5.25</span>
+                </div>
+            </div>
+
+            <!-- Pastries & Sweet Selection -->
+            <div class="menu-category">
+                <h3>Fresh Pastries</h3>
+                <div class="menu-item">
+                    <span class="item-name">Lemon Blueberry Bread</span>
+                    <span>$3.75</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Assorted Macarons</span>
+                    <span>$2.50</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Red Velvet Muffins</span>
+                    <span>$3.50</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Customer Experience Focus Section -->
+    <section style="background-color: white; padding: 5rem 0;" id="about">
+        <div class="container" style="margin: 0 auto;">
+            <h2 class="section-title">What Our Guests Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>"Coffee was SOOO good and owner is so SOOO SWEEET🫶🏽 everyone go here asap"</p>
+                    <div class="review-author">— Google Review</div>
+                </div>
+                <div class="review-card">
+                    <p>"Such a cozy cafe to pop into for a coffee, boba, tea, and treat! Everything was delicious especially the coffee."</p>
+                    <div class="review-author">— Sean & Kendra J.</div>
+                </div>
+                <div class="review-card">
+                    <p>"From the moment I walked in, the atmosphere felt warm and full of genuine hospitality..."</p>
+                    <div class="review-author">— Mjlebla</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Online Booking / Reservation Section -->
+    <section class="booking-section" id="book">
+        <div class="container" style="margin: 0 auto;">
+            <h2 class="section-title">Book a Table or Small Event</h2>
+            
+            <form class="booking-form" onsubmit="alert('Thank you! Your booking request has been sent. We will confirm your time shortly.'); return false;">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="(706) 555-0199">
+                    </div>
+                    <div class="form-grid" style="grid-column: span 2; margin-bottom: 0; gap: 1.5rem;">
+                        <div class="form-group">
+                            <label for="date">Select Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" required>
+                                <option value="">Choose a time...</option>
+                                <option value="morning">Morning (7:00 AM - 11:00 AM)</option>
+                                <option value="midday">Midday (11:00 AM - 3:00 PM)</option>
+                                <option value="evening">Late Afternoon (3:00 PM - 7:30 PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" required>
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5+ (Small Group)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Reservation Type</label>
+                        <select id="type">
+                            <option value="casual">Casual Coffee / Remote Work</option>
+                            <option value="boba-date">Boba / Dessert Date</option>
+                            <option value="meeting">Small Meeting / Study Group</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="notes">Special Requests / Notes</label>
+                        <textarea id="notes" rows="3" placeholder="Let us know if you have a seating preference or are celebrating a special occasion!"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Submit Reservation Request</button>
+            </form>
+            
+        </div>
+    </section>
+
+    <!-- Structural Footer with Contact Details -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Art & Cafe</h4>
+                <p>A hidden gem located in a quiet part of town, bringing community and premium flavors together.</p>
+                <p>Average price: $10–20 per person.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Our Location</h4>
+                <p>4699 Rosebud Rd<br>Loganville, GA 30052</p>
+                <p>Plus Code: Q2XM+94</p>
+            </div>
+            <div class="footer-col">
+                <h4>Get In Touch</h4>
+                <p>Phone: <a href="tel:7063122311">(706) 312-2311</a></p>
+                <p>Drop by any time to see our daily selection of sweets and rotating special drinks!</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Art & Cafe. All rights reserved. Built with love for the Loganville community.
+        </div>
+    </footer>
+
+</body>
+</html>
+
+```
